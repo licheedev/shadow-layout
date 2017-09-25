@@ -1,6 +1,10 @@
 <resources>
 
     <declare-styleable name="ShadowLayout">
+        <attr name="sl_trim_top" format="boolean"/>
+        <attr name="sl_trim_left" format="boolean"/>
+        <attr name="sl_trim_right" format="boolean"/>
+        <attr name="sl_trim_bottom" format="boolean"/>
         <attr name="sl_cornerRadius" format="dimension"/>
         <attr name="sl_shadowRadius" format="dimension"/>
         <attr name="sl_shadowColor" format="color"/>

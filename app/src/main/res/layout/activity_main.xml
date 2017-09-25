@@ -91,7 +91,12 @@
         android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:sl_shadowRadius="8dp"
+        app:sl_shadowRadius="20dp"
+        app:sl_trim_top="true"
+        app:sl_trim_left="true"
+        app:sl_trim_right="true"
+        app:sl_dy="0dp"
+        app:sl_dx="0dp"
         app:sl_shadowColor="@color/orange">
 
         <Button
