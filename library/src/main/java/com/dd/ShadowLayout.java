@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.FrameLayout;
 import com.dd.shadow.layout.R;
 
@@ -183,6 +184,7 @@ public class ShadowLayout extends FrameLayout {
         shadowPaint.setColor(fillColor);
         shadowPaint.setStyle(Paint.Style.FILL);
 
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         if (!isInEditMode()) {
             shadowPaint.setShadowLayer(shadowRadius, dx, dy, shadowColor);
         }
