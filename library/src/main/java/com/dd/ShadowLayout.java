@@ -178,21 +178,21 @@ public class ShadowLayout extends FrameLayout {
                 trimRight ? shadowWidth : shadowWidth - shadowRadius,
                 trimBottom ? shadowHeight : shadowHeight - shadowRadius);
 
-//        if (dy > 0) {
+        if (dy > 0) {
             shadowRect.top += dy;
             shadowRect.bottom -= dy;
-//        } else if (dy < 0) {
-//            shadowRect.top += Math.abs(dy);
-//            shadowRect.bottom -= Math.abs(dy);
-//        }
+        } else if (dy < 0) {
+            shadowRect.top += Math.abs(dy);
+            shadowRect.bottom -= Math.abs(dy);
+        }
 
-//        if (dx > 0) {
+        if (dx > 0) {
             shadowRect.left += dx;
             shadowRect.right -= dx;
-//        } else if (dx < 0) {
-//            shadowRect.left += Math.abs(dx);
-//            shadowRect.right -= Math.abs(dx);
-//        }
+        } else if (dx < 0) {
+            shadowRect.left += Math.abs(dx);
+            shadowRect.right -= Math.abs(dx);
+        }
 
         Paint shadowPaint = new Paint();
         shadowPaint.setAntiAlias(true);
