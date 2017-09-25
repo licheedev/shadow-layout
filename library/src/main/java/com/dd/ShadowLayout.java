@@ -13,6 +13,8 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import com.dd.shadow.layout.R;
 
+import static android.R.attr.shadowColor;
+
 public class ShadowLayout extends FrameLayout {
 
     private int mShadowColor;
@@ -95,6 +97,12 @@ public class ShadowLayout extends FrameLayout {
     @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
     private void setBackgroundCompat(int w, int h) {
+        // Cause paint.setShadowLayer() can not be previewed.
+        if (isInEditMode()) {
+            setBackgroundColor(mShadowColor);
+            return;
+        }
+
         Bitmap bitmap = createShadowBitmap(w, h, mCornerRadius, mShadowRadius, mDx, mDy, mShadowColor, Color.TRANSPARENT);
         BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -128,11 +136,24 @@ public class ShadowLayout extends FrameLayout {
         return context.obtainStyledAttributes(attributeSet, attr, 0, defStyleRes);
     }
 
+    /**
+     * Cause {@link Paint#setShadowLayer(float, float, float, int)} will set alpha of the shadow as
+     * the paint's alpha if the shadow color is opaque, or the alpha from the shadow color if not.
+     */
+    private void adjustAttributes() {
+        if (Color.alpha(mShadowColor) >= 255) {
+            int red = Color.red(mShadowColor);
+            int green = Color.green(mShadowColor);
+            int blue = Color.blue(mShadowColor);
+            mShadowColor = Color.argb(254, red, green, blue);
+        }
+    }
+
     @NonNull
     private Bitmap createShadowBitmap(int shadowWidth, int shadowHeight, float cornerRadius, float shadowRadius,
             float dx, float dy, int shadowColor, int fillColor) {
 
-        Bitmap output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ALPHA_8);
+        Bitmap output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ARGB_4444);
         Canvas canvas = new Canvas(output);
 
         RectF shadowRect = new RectF(
