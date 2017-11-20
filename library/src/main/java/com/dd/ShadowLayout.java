@@ -33,6 +33,7 @@ public class ShadowLayout extends FrameLayout {
 
     private boolean mInvalidateShadowOnSizeChanged = true;
     private boolean mForceInvalidateShadow = false;
+    private Bitmap shadowBitmap;
 
     public ShadowLayout(Context context) {
         super(context);
@@ -115,8 +116,11 @@ public class ShadowLayout extends FrameLayout {
             return;
         }
 
-        Bitmap bitmap = createShadowBitmap(w, h, mCornerRadius, mShadowRadius, mDx, mDy, mShadowColor, Color.TRANSPARENT);
-        BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+        if (shadowBitmap != null) {
+            shadowBitmap.recycle();
+        }
+        shadowBitmap = createShadowBitmap(w, h, mCornerRadius, mShadowRadius, mDx, mDy, mShadowColor, Color.TRANSPARENT);
+        BitmapDrawable drawable = new BitmapDrawable(getResources(), shadowBitmap);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             setBackground(drawable);
         } else {
@@ -207,5 +211,14 @@ public class ShadowLayout extends FrameLayout {
         canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint);
 
         return output;
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (shadowBitmap != null && !shadowBitmap.isRecycled()) {
+            shadowBitmap.recycle();
+            shadowBitmap = null;
+        }
     }
 }
