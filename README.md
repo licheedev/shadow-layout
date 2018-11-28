@@ -36,7 +36,7 @@ The lib is available on Maven Central, you can find it with [Gradle, please]
 	}
     
     	dependencies {
-	        implementation 'com.github.licheedev:shadow-layout:Tag'
+	        implementation 'com.github.licheedev:shadow-layout:1.0.3'
 	}
 ```
 
