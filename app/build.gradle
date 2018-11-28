@@ -1,27 +1,12 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven { url "https://maven.google.com" }
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
-    }
-}
 apply plugin: 'com.android.application'
 
-repositories {
-    jcenter()
-    google()
-}
-
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
 
     defaultConfig {
         applicationId "com.dd.sample"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode Integer.parseInt(project.VERSION_CODE)
         versionName project.VERSION_NAME
     }
@@ -35,7 +20,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation project(':library')
-//    compile 'com.github.dmytrodanylyk.shadow-layout:library:1.0.0-SNAPSHOT@aar'
 }
