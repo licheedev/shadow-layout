@@ -28,9 +28,16 @@ Android Shadow Layout - because `CardView` is not enough. [Why?] (https://github
 The lib is available on Maven Central, you can find it with [Gradle, please]
 
 ```
-dependencies {
-    compile 'com.github.dmytrodanylyk.shadow-layout:library:1.0.3'
-}
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+    
+    	dependencies {
+	        implementation 'com.github.licheedev:shadow-layout:Tag'
+	}
 ```
 
 ### Contributions
